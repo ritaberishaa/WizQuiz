@@ -14,6 +14,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText etEmail, etPassword;
     private MaterialButton btnLogin;
+    // Nëse ke elementin tvSignUp në layout, atëherë shkarko atë (nëse jo, kjo do të mbetet null)
     private TextView tvSignUp, tvForgotPassword;
 
     @Override
@@ -25,6 +26,8 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+
+        // Nëse ke elementin tvSignUp në layout, shkarko atë; nëse jo, mos e shkakto gabime
         tvSignUp = findViewById(R.id.tvSignUp);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
@@ -36,21 +39,25 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Navigimi tek Sign Up
-        tvSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-            }
-        });
+        // Nëse tvSignUp nuk është null, vendos navigimin tek SignUpActivity
+        if (tvSignUp != null) {
+            tvSignUp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+                }
+            });
+        }
 
-        // Navigimi tek Forgot Password
-        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
-            }
-        });
+        // Nëse tvForgotPassword nuk është null, vendos navigimin tek ForgotPasswordActivity
+        if (tvForgotPassword != null) {
+            tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+                }
+            });
+        }
     }
 
     private void loginUser() {

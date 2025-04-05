@@ -5,65 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Gradient Background -->
+    <!-- Sfondi Gradient -->
     <View
         android:id="@+id/viewGradientBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_gradient" />
 
-    <!-- ImageView për ikonën e quiz‑it -->
+    <!-- Guideline për vendosjen e logos (35% nga kryeti i ekranit) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <!-- Logoja (ImageView): qendra e saj do të jetë në Guideline -->
     <ImageView
         android:id="@+id/imgQuizIcon"
-        android:layout_width="280dp"
-        android:layout_height="280dp"
+        android:layout_width="320dp"
+        android:layout_height="320dp"
         android:src="@drawable/ic_quiz_icon"
         android:contentDescription="@string/quiz_icon"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_logo"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Butoni "START": më i madh dhe më poshtë -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnStart"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:text="START"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:cornerRadius="50dp"
+        app:layout_constraintTop_toBottomOf="@id/imgQuizIcon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.3" />
-
-    <!-- Titulli i Quiz‑it -->
-    <TextView
-        android:id="@+id/tvQuizTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="QUIZ"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        android:textColor="@android:color/white"
-        app:layout_constraintTop_toBottomOf="@id/imgQuizIcon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
-
-    <!-- Subtitle -->
-    <TextView
-        android:id="@+id/tvSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Test your knowledge!"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/tvQuizTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="4dp" />
-
-    <!-- Butoni START -->
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnStart"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:text="START"
-        android:textStyle="bold"
-        app:cornerRadius="50dp"
-        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="32dp" />
+        android:layout_marginTop="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
