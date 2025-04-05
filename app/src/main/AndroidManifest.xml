@@ -42,12 +42,7 @@
 
         <!-- Aktiviteti për Sign Up -->
         <activity
-            android:name=".SignupActivity"
-            android:exported="false" />
-
-        <!-- Nëse nuk e përdor MainActivity, mund ta vendosësh si false ose ta fshish -->
-        <activity
-            android:name=".MainActivity"
+            android:name=".SignUpActivity"
             android:exported="false" />
 
     </application>
