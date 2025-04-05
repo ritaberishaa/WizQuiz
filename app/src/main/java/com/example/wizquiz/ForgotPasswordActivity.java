@@ -1,17 +1,16 @@
 package com.example.wizquiz;
 
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
-    private EditText etEmail;
-    private Button btnReset;
+    private TextInputEditText etEmail;
+    private MaterialButton btnSubmit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,25 +18,22 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         etEmail = findViewById(R.id.etEmail);
-        btnReset = findViewById(R.id.btnReset);
+        btnSubmit = findViewById(R.id.btnSubmit);
 
-        btnReset.setOnClickListener(new View.OnClickListener(){
+        // Kur klikohet SUBMIT
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { resetPassword(); }
+            public void onClick(View view) {
+                String email = etEmail.getText().toString().trim();
+                if (email.isEmpty()) {
+                    etEmail.setError("Please enter your email");
+                    etEmail.requestFocus();
+                } else {
+                    // Këtu implemento logjikën e dërgimit të link‑ut ose reset password
+                    Toast.makeText(ForgotPasswordActivity.this, "Password reset link sent", Toast.LENGTH_SHORT).show();
+                    finish(); // Mbyll këtë aktivitet ose shko diku tjetër
+                }
+            }
         });
-    }
-
-    private void resetPassword(){
-        String email = etEmail.getText().toString().trim();
-
-        if(email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            etEmail.setError("Vendosni një email valid");
-            etEmail.requestFocus();
-            return;
-        }
-
-        // Simulimi i dërgimit të një link‑u për rivendosjen e fjalëkalimit
-        Toast.makeText(this, "Link për rivendosjen e fjalëkalimit është dërguar në emailin tuaj", Toast.LENGTH_SHORT).show();
-        finish();
     }
 }
