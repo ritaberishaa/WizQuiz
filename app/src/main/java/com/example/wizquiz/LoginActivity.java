@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Vendos soft input mode që layout-i të "resize" kur tastiera shfaqet
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         // Lidhja e elementeve të UI me kodin
         etEmail = findViewById(R.id.etEmail);
@@ -59,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
     }
+
 
     private void loginUser() {
         String email = etEmail.getText().toString().trim();

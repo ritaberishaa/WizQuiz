@@ -28,7 +28,11 @@
         <!-- Aktiviteti për Login -->
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"/>
+
+        />
+
 
         <!-- Aktiviteti për Home -->
         <activity
@@ -38,12 +42,14 @@
         <!-- Aktiviteti për Forgot Password -->
         <activity
             android:name=".ForgotPasswordActivity"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"/>
 
         <!-- Aktiviteti për Sign Up -->
         <activity
             android:name=".SignUpActivity"
-            android:exported="false" />
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true"/>
 
     </application>
 

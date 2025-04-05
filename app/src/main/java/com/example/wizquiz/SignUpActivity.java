@@ -19,7 +19,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        // Lidhja e elementeve të UI
+        // Lidhja e elementeve të UI nga layout
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);
         etPhone = findViewById(R.id.etPhone);
@@ -36,7 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        // Navigimi në LoginActivity kur klikohet "Already have an account? Login here"
+        // Navigimi në LoginActivity kur klikohet tek "Already have an account? Login here"
         tvAlreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
