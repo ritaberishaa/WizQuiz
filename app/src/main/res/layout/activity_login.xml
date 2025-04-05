@@ -3,59 +3,110 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="24dp">
 
-    <!-- Fusha për Email -->
-    <EditText
-        android:id="@+id/etEmail"
+    <!-- Titulli i ekranit -->
+    <TextView
+        android:id="@+id/tvLoginTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:text="Hyr në llogarinë tënde"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp"/>
+        android:gravity="center"
+        android:layout_marginBottom="32dp"/>
 
-    <!-- Fusha për Fjalëkalimin -->
-    <EditText
-        android:id="@+id/etPassword"
+    <!-- Fusha për Email -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        app:layout_constraintTop_toBottomOf="@id/tvLoginTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Fusha për Fjalëkalim -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilPassword"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="Fjalëkalimi"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/etEmail"
+        app:passwordToggleEnabled="true"
+        app:layout_constraintTop_toBottomOf="@id/tilEmail"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_margin="16dp"/>
+        android:layout_marginBottom="24dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Butoni për Login -->
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Login"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
+        app:cornerRadius="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tilPassword"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginBottom="16dp" />
 
-    <!-- Buton për Sign Up -->
-    <Button
-        android:id="@+id/btnSignUp"
-        android:layout_width="wrap_content"
+    <!-- Rreshti i veprimeve për Sign Up dhe Forgot Password -->
+    <LinearLayout
+        android:id="@+id/llActions"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sign Up"
+        android:orientation="horizontal"
         app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <!-- Buton për Forget Password -->
-    <Button
-        android:id="@+id/btnForgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Forgot Password"
-        app:layout_constraintTop_toBottomOf="@id/btnLogin"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="16dp"/>
+        android:gravity="center">
+
+        <!-- Butoni për Sign Up -->
+        <TextView
+            android:id="@+id/tvSignUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            android:padding="8dp" />
+
+        <!-- Shkallëzues -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="|"
+            android:textColor="#888888"
+            android:padding="8dp" />
+
+        <!-- Butoni për Forgot Password -->
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forgot Password"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            android:padding="8dp" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
