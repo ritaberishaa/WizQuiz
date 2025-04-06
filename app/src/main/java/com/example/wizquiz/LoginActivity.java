@@ -1,13 +1,14 @@
-package com.example.wizquiz;
+package com.example.wizquiz;  // ose paketa jote
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Patterns;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -15,83 +16,87 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputEditText etEmail, etPassword;
     private MaterialButton btnLogin;
-    // Nëse ke elementin tvSignUp në layout, atëherë shkarko atë (nëse jo, kjo do të mbetet null)
-    private TextView tvSignUp, tvForgotPassword;
+    private TextView tvForgotPassword, tvSignUp;
+
+    private DatabaseHelper databaseHelper; // klasa jote e SQLite
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_login);  // emri i skedarit XML (p.sh. login.xml)
 
-        // Vendos soft input mode që layout-i të "resize" kur tastiera shfaqet
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-        // Lidhja e elementeve të UI me kodin
+        // 1) Lidhu me komponentët e layout-it sipas ID-ve që ke
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
-
-        // Nëse ke elementin tvSignUp në layout, shkarko atë; nëse jo, mos e shkakto gabime
-        tvSignUp = findViewById(R.id.tvSignUp);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
+        tvSignUp = findViewById(R.id.tvSignUp);   // Kjo zëvendëson tvCreateAccount
 
-        // Veprimi për butonin Login
+        // 2) Inicializo DatabaseHelper
+        databaseHelper = new DatabaseHelper(this);
+
+        // 3) Kur klikon butonin LOGIN
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                loginUser();
+                String email = etEmail.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
+
+                // Validim fillestar
+                if (email.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this,
+                            "Plotësoni email-in dhe fjalëkalimin!",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Kontroll në DB
+                Cursor cursor = databaseHelper.getUserByEmail(email);
+                if (cursor != null && cursor.moveToFirst()) {
+                    // Merr kolonën e password-it
+                    int colIndex = cursor.getColumnIndexOrThrow(DatabaseHelper.COLUMN_PASSWORD);
+                    String storedPassword = cursor.getString(colIndex);
+                    cursor.close();
+
+                    if (storedPassword.equals(password)) {
+                        Toast.makeText(LoginActivity.this,
+                                "Login i suksesshëm!",
+                                Toast.LENGTH_SHORT).show();
+
+                        // p.sh.: startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                        // finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this,
+                                "Fjalëkalimi nuk është i saktë!",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this,
+                            "Ky email nuk ekziston! Regjistrohu më parë.",
+                            Toast.LENGTH_SHORT).show();
+                    if (cursor != null) cursor.close();
+                }
             }
         });
 
-        // Nëse tvSignUp nuk është null, vendos navigimin tek SignUpActivity
-        if (tvSignUp != null) {
-            tvSignUp.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
-                }
-            });
-        }
+        // 4) Forgot Password (opsionale)
+        tvForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Këtu mund të hapësh ForgotPasswordActivity ose të bësh diçka tjetër
+                Toast.makeText(LoginActivity.this,
+                        "Opsioni 'Forgot Password' nuk është implementuar!",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        // Nëse tvForgotPassword nuk është null, vendos navigimin tek ForgotPasswordActivity
-        if (tvForgotPassword != null) {
-            tvForgotPassword.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
-                }
-            });
-        }
-    }
-
-
-    private void loginUser() {
-        String email = etEmail.getText().toString().trim();
-        String password = etPassword.getText().toString().trim();
-
-        // Validimi i email‑it
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.setError("Vendosni një email valid");
-            etEmail.requestFocus();
-            return;
-        }
-
-        // Validimi i fjalëkalimit
-        if (password.isEmpty()) {
-            etPassword.setError("Vendosni fjalëkalimin");
-            etPassword.requestFocus();
-            return;
-        }
-        // Kontroll për të paktën një numër dhe një karakter special
-        if (!password.matches("^(?=.*[0-9])(?=.*[!@#$%^&*]).+$")) {
-            etPassword.setError("Fjalëkalimi duhet të përmbajë të paktën një numër dhe një karakter special");
-            etPassword.requestFocus();
-            return;
-        }
-
-        // Simulimi i verifikimit të përdoruesit
-        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        // 5) Sign Up link
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Kalo te SignUpActivity
+                startActivity(new Intent(LoginActivity.this, SignUpActivity.class));
+            }
+        });
     }
 }
