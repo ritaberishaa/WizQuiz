@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class SignUpActivity extends AppCompatActivity {
 
     // Duke u bazuar në ID-të e tua ekzistuese në layout
@@ -67,7 +69,8 @@ public class SignUpActivity extends AppCompatActivity {
                 // p.sh.: password = HashUtil.hashPassword(password);
 
                 // Shtojmë user-in në DB
-                databaseHelper.addUser(email, password, name, phone);
+                String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
+                databaseHelper.addUser(email, hashedPassword, name, phone);
 
                 // Mesazh suksesi
                 Toast.makeText(SignUpActivity.this,
