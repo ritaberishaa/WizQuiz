@@ -1,45 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:background="@drawable/bg_gradient">
 
-    <LinearLayout
+    <!-- Logo e aplikacionit -->
+    <ImageView
+        android:id="@+id/ivQuizIcon"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/ic_quiz_icon"
+        android:contentDescription="@string/app_name"
+        android:layout_marginTop="40dp" />
+
+    <!-- Titulli kryesor (p.sh., 'Verifiko Kodin') -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Verifiko Kodin"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Nën‑titulli (p.sh., 'Ju lutem futni kodin e dërguar në email') -->
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ju lutem futni kodin e dërguar në email"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="4dp" />
+
+    <!-- Karta që mban fushën OTP dhe butonin Verifiko -->
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:cardUseCompatPadding="true">
 
-        <!-- Teksti udhëzues -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Enter the code sent to your email"
-            android:textSize="16sp"/>
-
-        <!-- Fusha për kodin 6-shifror -->
-        <com.google.android.material.textfield.TextInputLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etOTP"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilOTP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="6-digit code"
-                android:inputType="number"/>
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Kodi OTP">
 
-        <!-- Butoni VERIFIKO -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnVerify"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Verify"
-            android:textAllCaps="false"
-            android:layout_marginTop="16dp"
-            app:cornerRadius="50dp"/>
-    </LinearLayout>
-</ScrollView>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etOTP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVerify"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VERIFIKO"
+                android:textAllCaps="true"
+                android:layout_marginTop="16dp"
+                style="?attr/materialButtonOutlinedStyle"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- (Opsionale) Link ose text shtesë, p.sh. 'Nuk keni marrë kodin? Ridërgo...' -->
+    <!--
+    <TextView
+        android:id="@+id/tvResend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nuk keni marrë kodin? Ridërgo"
+        android:textSize="14sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="16dp"/>
+    -->
+</LinearLayout>
