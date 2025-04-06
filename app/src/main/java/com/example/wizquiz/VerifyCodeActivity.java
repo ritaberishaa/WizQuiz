@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import android.content.Intent;
@@ -14,7 +13,6 @@ public class VerifyCodeActivity extends AppCompatActivity {
 
     private TextInputEditText etOTP;
     private MaterialButton btnVerify;
-
     private DatabaseHelper databaseHelper;
     private String email;
 
@@ -27,7 +25,6 @@ public class VerifyCodeActivity extends AppCompatActivity {
         btnVerify = findViewById(R.id.btnVerify);
         databaseHelper = new DatabaseHelper(this);
 
-        // Marrim email nga Intent
         email = getIntent().getStringExtra("EMAIL");
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
@@ -39,7 +36,6 @@ public class VerifyCodeActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Marrim OTP info nga DB
                 OTPData otpData = databaseHelper.getOTPInfo(email);
                 if (otpData == null) {
                     Toast.makeText(VerifyCodeActivity.this, "S’ka kod të regjistruar!", Toast.LENGTH_SHORT).show();
@@ -57,10 +53,8 @@ public class VerifyCodeActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Nëse erdhëm deri këtu, do të thotë që kodi është i vlefshëm
                 Toast.makeText(VerifyCodeActivity.this, "Kodi u verifikua me sukses!", Toast.LENGTH_SHORT).show();
 
-                // Hapim ResetPasswordActivity
                 Intent i = new Intent(VerifyCodeActivity.this, ResetPasswordActivity.class);
                 i.putExtra("EMAIL", email);
                 startActivity(i);

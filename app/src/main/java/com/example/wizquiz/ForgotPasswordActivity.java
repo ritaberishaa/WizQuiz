@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
@@ -54,15 +54,15 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 }
                 cursor.close();
 
-                // Gjenerojmë OTP
-                String otpCode = generateRandomCode(6);
+                // Gjenerojmë OTP me SecureRandom
+                String otpCode = generateOTP();
                 long expirationTime = System.currentTimeMillis() + 5 * 60 * 1000; // 5 minuta
 
                 // Ruajmë OTP në DB
                 databaseHelper.saveOTP(email, otpCode, expirationTime);
 
-                // Dërgojmë email me kodin OTP (real)
-                sendEmailWithCode(email, otpCode);
+                // Dërgojmë email me kodin OTP duke përdorur OTPEmailSender
+                new SendOtpTask(email, otpCode).execute();
 
                 Toast.makeText(ForgotPasswordActivity.this,
                         "Kodi i rivendosjes u dërgua në email.",
@@ -77,55 +77,33 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         });
     }
 
-    // Gjeneron një varg me gjatësi të caktuar (p.sh. 6 shifra)
-    private String generateRandomCode(int length) {
-        String digits = "0123456789";
-        Random r = new Random();
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            sb.append(digits.charAt(r.nextInt(digits.length())));
-        }
-        return sb.toString();
-    }
-
-    // Metoda që dërgon email me kodin OTP duke përdorur JavaMail në një AsyncTask
-    private void sendEmailWithCode(String recipientEmail, String code) {
-        // Vendos këtu kredencialet e llogarisë tënde Gmail
-        final String senderEmail = "yourgmail@gmail.com";
-        final String senderPassword = "yourapppassword"; // përdor një app password nëse ke 2FA të aktivizuar
-
-        final String subject = "Your OTP Code";
-        final String body = "Your OTP code is: " + code;
-
-        new SendMailTask().execute(senderEmail, senderPassword, recipientEmail, subject, body);
+    // Gjeneron OTP duke përdorur SecureRandom
+    private String generateOTP() {
+        SecureRandom secureRandom = new SecureRandom();
+        int otp = secureRandom.nextInt(900000) + 100000;
+        return String.valueOf(otp);
     }
 
     // AsyncTask për dërgimin e email-it në sfond
-    private class SendMailTask extends AsyncTask<String, Void, Boolean> {
-        @Override
-        protected Boolean doInBackground(String... params) {
-            try {
-                String senderEmail = params[0];
-                String senderPassword = params[1];
-                String recipientEmail = params[2];
-                String subject = params[3];
-                String body = params[4];
+    private class SendOtpTask extends AsyncTask<Void, Void, Boolean> {
 
-                GMailSender sender = new GMailSender(senderEmail, senderPassword);
-                sender.sendMail(subject, body, senderEmail, recipientEmail);
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-                return false;
-            }
+        private String recipient;
+        private String otp;
+
+        public SendOtpTask(String recipient, String otp) {
+            this.recipient = recipient;
+            this.otp = otp;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            return OTPEmailSender.sendEmail(recipient, otp);
         }
 
         @Override
         protected void onPostExecute(Boolean success) {
-            if (success) {
-                Toast.makeText(ForgotPasswordActivity.this, "Email sent successfully!", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(ForgotPasswordActivity.this, "Failed to send email.", Toast.LENGTH_SHORT).show();
+            if (!success) {
+                Toast.makeText(ForgotPasswordActivity.this, "Dërgimi i email-it dështoi. Ju lutemi provoni përsëri.", Toast.LENGTH_SHORT).show();
             }
         }
     }

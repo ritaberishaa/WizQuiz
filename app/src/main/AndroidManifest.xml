@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <application
         android:allowBackup="true"
@@ -20,9 +22,6 @@
         <activity
             android:name=".VerifyCodeActivity"
             android:exported="false" />
-        <activity
-            android:name=".QuizActivity"
-            android:exported="false" /> <!-- Aktiviteti kryesor: WelcomeActivity -->
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
