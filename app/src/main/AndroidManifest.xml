@@ -14,43 +14,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WizQuiz"
         tools:targetApi="31">
-
+        <activity
+            android:name=".QuizActivity"
+            android:exported="false" />
         <!-- Aktiviteti kryesor: WelcomeActivity -->
         <activity
             android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- Aktiviteti për Login -->
+        </activity> <!-- Aktiviteti për Login -->
         <activity
             android:name=".LoginActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true"/>
-
-        />
-
-
-        <!-- Aktiviteti për Home -->
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" /> <!-- Aktiviteti për Home -->
         <activity
             android:name=".HomeActivity"
-            android:exported="false" />
-
-        <!-- Aktiviteti për Forgot Password -->
+            android:exported="false" /> <!-- Aktiviteti për Forgot Password -->
         <activity
             android:name=".ForgotPasswordActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true"/>
-
-        <!-- Aktiviteti për Sign Up -->
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" /> <!-- Aktiviteti për Sign Up -->
         <activity
             android:name=".SignUpActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:exported="true"/>
-
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 
 </manifest>

@@ -3,19 +3,101 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient_home"
+    android:padding="16dp">
 
-    <!-- Shembull: Një TextView për mesazh mirëseardhjeje -->
+    <!-- Numri i pyetjes, p.sh. 01, 02, ... -->
     <TextView
-        android:id="@+id/tvWelcome"
+        android:id="@+id/tvQuestionNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mirësevini në WizQuiz!"
-        android:textSize="24sp"
+        android:text="01"
+        android:textSize="16sp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/circle_bg"
+        android:gravity="center"
+        android:padding="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_margin="16dp"/>
+        app:layout_constraintRight_toRightOf="parent"/>
 
-    <!-- Shto elementë të tjerë për pyetjet e quiz‑it ose navigimin tek ekranat tjera -->
+    <!-- “Flluska” e pyetjes (një FrameLayout me background të rrumbullakosur) -->
+    <FrameLayout
+        android:id="@+id/layoutQuestionBubble"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bubble_bg"
+        android:layout_marginTop="8dp"
+        android:padding="24dp"
+        app:layout_constraintTop_toBottomOf="@id/tvQuestionNumber"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent">
+
+        <TextView
+            android:id="@+id/tvQuestionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pyetja do shfaqet këtu..."
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textAlignment="center"/>
+    </FrameLayout>
+
+    <!-- Butoni Opsion A -->
+    <Button
+        android:id="@+id/btnOptionA"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="A) Opsioni 1"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/option_bg"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutQuestionBubble"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <!-- Butoni Opsion B -->
+    <Button
+        android:id="@+id/btnOptionB"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="B) Opsioni 2"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/option_bg"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnOptionA"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <!-- Butoni Opsion C -->
+    <Button
+        android:id="@+id/btnOptionC"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="C) Opsioni 3"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/option_bg"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnOptionB"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <!-- Butoni Opsion D -->
+    <Button
+        android:id="@+id/btnOptionD"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="D) Opsioni 4"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/option_bg"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnOptionC"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
