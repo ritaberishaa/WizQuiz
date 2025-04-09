@@ -1,46 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/bg_gradient">
+    android:orientation="vertical"
+    android:background="@drawable/bg_gradient"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvTitleComments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Komentet tuaja"
-        android:textSize="20sp"
-        android:textColor="#FFF"
-        android:layout_gravity="center"
-        android:padding="8dp" />
-
+    <!-- EditText për futjen e komenteve; përdor drawable për sfond me rrumbullakë -->
     <EditText
-        android:id="@+id/edtNewComment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Shto një koment..."
-        android:layout_marginBottom="8dp"
-        android:padding="10dp"
-        android:background="@color/white"
-        android:textColor="#FFF"
-        android:textColorHint="#BBFFFFFF"/>
+    android:id="@+id/edtNewComment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Shto një koment..."
+    android:background="@drawable/bubble_bg"
+    android:padding="12dp"
+    android:textColor="@android:color/white"
+    android:textColorHint="@android:color/white"
+    android:layout_marginBottom="12dp"/>
 
-
+        <!-- Butoni "SHTO" me ngjyrë të ngjashme me butonat e opsioneve -->
     <Button
-        android:id="@+id/btnAddComment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Shto Koment"
-        android:background="@drawable/bg_gradient"
-        android:textColor="#FFF"
-        android:layout_marginBottom="16dp"/>
+    android:id="@+id/btnAddComment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="SHTO"
+    android:background="@drawable/option_bg"
+    android:textColor="@android:color/white"
+    android:layout_marginBottom="16dp"/>
 
+        <!-- Teks me ndarje për titullin e seksionit të komenteve -->
+    <TextView
+    android:id="@+id/tvEarlierComments"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Earlier Comments"
+    android:textSize="18sp"
+    android:textColor="@android:color/white"
+    android:gravity="center"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp" />
+
+        <!-- Mundësisht një vijë ndarje (divider) -->
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="@android:color/white"
+    android:layout_marginBottom="16dp" />
+
+        <!-- ListView për shfaqjen e komenteve; përdor një divizor personalizuar -->
     <ListView
         android:id="@+id/listViewComments"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp" />
+    </LinearLayout>
