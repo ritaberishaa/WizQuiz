@@ -188,9 +188,21 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        // **Butoni "Komento"** (CRUD i komenteve në një aktivitet të ri)
+        builder.setNeutralButton("Komento", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                // Hapi CommentsActivity
+                startActivity(new Intent(HomeActivity.this, CommentActivity.class));
+            }
+        });
+
         builder.setCancelable(false);
         builder.show();
     }
+
+
 
     // Rifillon kuizin nga e para (0 pikë, pyetje e parë, etj.)
     private void resetQuiz() {
