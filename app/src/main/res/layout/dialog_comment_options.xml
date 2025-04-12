@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog"
+    android:padding="16dp">
+
+    <!-- Titulli i dialogut -->
+    <TextView
+    android:id="@+id/tvDialogTitle"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Opsionet për komentet"
+    android:textSize="18sp"
+    android:textStyle="bold"
+    android:textColor="#000000"
+    android:gravity="center"
+    android:padding="8dp" />
+
+    <!-- Vijë ndarëse e hollë -->
+    <View
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="#DDDDDD"
+    android:layout_marginBottom="8dp"/>
+
+        <!-- Opsioni për Përditësim -->
+    <TextView
+    android:id="@+id/tvUpdateComment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Përditëso Koment"
+    android:textSize="16sp"
+    android:textColor="#007AFF"
+    android:padding="10dp"
+    android:clickable="true"
+    android:focusable="true" />
+
+    <!-- Opsioni për Fshirje -->
+    <TextView
+    android:id="@+id/tvDeleteComment"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Fshi Koment"
+    android:textSize="16sp"
+    android:textColor="#FF3B30"
+    android:padding="10dp"
+    android:clickable="true"
+    android:focusable="true" />
+    </LinearLayout>

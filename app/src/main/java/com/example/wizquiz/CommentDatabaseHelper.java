@@ -36,7 +36,6 @@ class CommentDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    // CREATE: Shto një koment
     public long addComment(String text) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -46,7 +45,6 @@ class CommentDatabaseHelper extends SQLiteOpenHelper {
         return insertedId;
     }
 
-    // READ: Merr të gjithë komentet
     public ArrayList<Comment> getAllComments() {
         ArrayList<Comment> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -64,7 +62,6 @@ class CommentDatabaseHelper extends SQLiteOpenHelper {
         return list;
     }
 
-    // UPDATE: Përditëso një koment
     public int updateComment(int id, String newText) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -75,7 +72,6 @@ class CommentDatabaseHelper extends SQLiteOpenHelper {
         return rowsAffected;
     }
 
-    // DELETE: Fshi një koment
     public int deleteComment(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         int rowsDeleted = db.delete(TABLE_COMMENTS, COLUMN_ID + "=?",

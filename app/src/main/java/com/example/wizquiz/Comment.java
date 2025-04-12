@@ -4,14 +4,9 @@ public class Comment {
     private int id;
     private String text;
 
-    public Comment() { }
 
     public Comment(int id, String text) {
         this.id = id;
-        this.text = text;
-    }
-
-    public Comment(String text) {
         this.text = text;
     }
 

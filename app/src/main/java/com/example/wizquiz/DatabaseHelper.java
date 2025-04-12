@@ -13,13 +13,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "WizQuizDB.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Emrat e tabelës së user-ëve
     public static final String TABLE_USERS = "users";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_EMAIL = "email";
     public static final String COLUMN_PASSWORD = "password";
 
-    // Tabela OTP
     private static final String TABLE_OTP = "otp_data";
     private static final String COLUMN_OTP_EMAIL = "otp_email";
     private static final String COLUMN_OTP_CODE = "otp_code";
@@ -31,7 +29,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Krijojmë tabelën e user-ëve
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
                 + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COLUMN_EMAIL + " TEXT UNIQUE, "
@@ -39,7 +36,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + ")";
         db.execSQL(CREATE_USERS_TABLE);
 
-        // Krijojmë tabelën e OTP
         String CREATE_OTP_TABLE = "CREATE TABLE " + TABLE_OTP + "("
                 + COLUMN_OTP_EMAIL + " TEXT, "
                 + COLUMN_OTP_CODE + " TEXT, "
@@ -50,26 +46,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Rimodelim - fshi tabelat e vjetra e i rikrijo
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OTP);
         onCreate(db);
     }
-
-    // Kthen cursor me rreshtin e user-it për email-in e dhënë (ose bosh/nul nëse s’ka)
     public Cursor getUserByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + " = ?";
         return db.rawQuery(query, new String[]{email});
     }
 
-    // Ruaj OTP në DB (nëse ekziston rresht, e fshin dhe e shton përsëri)
     public void saveOTP(String email, String code, long expiry) {
         SQLiteDatabase db = this.getWritableDatabase();
-        // Së pari, fshijmë çdo rresht ekzistues për atë email
         db.delete(TABLE_OTP, COLUMN_OTP_EMAIL + "=?", new String[]{email});
 
-        // Pastaj shtojmë rresht të ri
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_OTP_EMAIL, email);
         cv.put(COLUMN_OTP_CODE, code);
@@ -79,7 +69,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // Merr info OTP për email-in
     public OTPData getOTPInfo(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_OTP + " WHERE " + COLUMN_OTP_EMAIL + " = ?";
@@ -96,7 +85,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return null;
     }
 
-    // Përditëso password për user-in me email të caktuar
     public void updateUserPassword(String email, String hashedPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -105,13 +93,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    // (Opsionale) Shtojë user-in. E përdor SignUpActivity
     public void addUser(String email, String hashedPassword, String name, String phone) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_EMAIL, email);
         cv.put(COLUMN_PASSWORD, hashedPassword);
-        // name, phone s’janë kolona në këtë strukturë të thjeshtë, do duhej t’i shtoje
+
         db.insert(TABLE_USERS, null, cv);
         db.close();
     }

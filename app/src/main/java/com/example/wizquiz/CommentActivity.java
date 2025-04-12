@@ -2,8 +2,6 @@ package com.example.wizquiz;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -11,9 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class CommentActivity extends AppCompatActivity {
@@ -31,18 +27,14 @@ public class CommentActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
-        // Inicializo elementët e UI-së
         edtNewComment = findViewById(R.id.edtNewComment);
         btnAddComment = findViewById(R.id.btnAddComment);
         listViewComments = findViewById(R.id.listViewComments);
 
-        // Inicializo database helper për komentet
         dbHelper = new CommentDatabaseHelper(this);
 
-        // Ngarko komentet nga DB
         loadCommentsFromDB();
 
-        // Butoni "SHTO" për të shtuar një koment të ri
         btnAddComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,19 +42,18 @@ public class CommentActivity extends AppCompatActivity {
                 if (!newCommentText.isEmpty()) {
                     long insertedId = dbHelper.addComment(newCommentText);
                     if (insertedId != -1) {
-                        Toast.makeText(CommentActivity.this, "Koment i shtuar!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CommentActivity.this, "New comment added!", Toast.LENGTH_SHORT).show();
                         edtNewComment.setText("");
-                        loadCommentsFromDB();  // Rifresko listën e komenteve
+                        loadCommentsFromDB();
                     } else {
-                        Toast.makeText(CommentActivity.this, "Nuk u shtua komenti!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CommentActivity.this, "No comment added!!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(CommentActivity.this, "Ju lutem shkruani një koment!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentActivity.this, "Please text a comment!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        // Kur klikohet në një element të ListView, ofro opsionet për UPDATE ose DELETE
         listViewComments.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,71 +63,76 @@ public class CommentActivity extends AppCompatActivity {
         });
     }
 
-    // Ngarkon komentet nga databaza dhe rifreskon ListView-në
     private void loadCommentsFromDB() {
         commentList = dbHelper.getAllComments();
         adapter = new CommentAdapter(this, commentList);
         listViewComments.setAdapter(adapter);
     }
 
-    // Dialog me opsionet për përditësim ose fshirje të një komenti
     private void showUpdateDeleteDialog(final Comment comment) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Opsionet për komentin");
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_comment_options, null);
 
-        String[] options = {"Përditëso Koment", "Fshi Koment"};
-        builder.setItems(options, new DialogInterface.OnClickListener() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+
+        final AlertDialog dialog = builder.create();
+
+        dialogView.findViewById(R.id.tvUpdateComment).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
-                    showUpdateCommentDialog(comment);
-                } else if (which == 1) {
-                    deleteComment(comment);
-                }
+            public void onClick(View v) {
+                dialog.dismiss();
+                showUpdateCommentDialog(comment);
             }
         });
-        builder.show();
+
+        dialogView.findViewById(R.id.tvDeleteComment).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                deleteComment(comment);
+            }
+        });
+
+        dialog.show();
     }
 
-    // Dialog për përditësimin e një komenti
     private void showUpdateCommentDialog(final Comment comment) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Përditëso Koment");
+        builder.setTitle("Update Comment");
 
         final EditText input = new EditText(this);
         input.setText(comment.getText());
         builder.setView(input);
 
-        builder.setPositiveButton("Ruaj", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String newText = input.getText().toString().trim();
                 if (!newText.isEmpty()) {
                     int rowsAffected = dbHelper.updateComment(comment.getId(), newText);
                     if (rowsAffected > 0) {
-                        Toast.makeText(CommentActivity.this, "Koment i përditësuar!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CommentActivity.this, "Updated comment!", Toast.LENGTH_SHORT).show();
                         loadCommentsFromDB();
                     } else {
-                        Toast.makeText(CommentActivity.this, "Nuk u përditësua komenti!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CommentActivity.this, "Comment is not updated!", Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(CommentActivity.this, "Teksti nuk mund të jetë bosh!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CommentActivity.this, "Text cannot be empty!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        builder.setNegativeButton("Anulo", null);
+        builder.setNegativeButton("Discard", null);
         builder.show();
     }
 
-    // Fshin një koment nga databaza
     private void deleteComment(Comment comment) {
         int rowsDeleted = dbHelper.deleteComment(comment.getId());
         if (rowsDeleted > 0) {
-            Toast.makeText(this, "Koment i fshirë!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Deleted comment!", Toast.LENGTH_SHORT).show();
             loadCommentsFromDB();
         } else {
-            Toast.makeText(this, "Nuk u fshi komenti!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Comments can not be deleted!", Toast.LENGTH_SHORT).show();
         }
     }
 }
