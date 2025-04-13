@@ -46,8 +46,4 @@ WizQuiz/
 └── settings.gradle.kts    # Cilësimet e projektit
 ```
 
-Ky projekt është i licencuar nën [MIT License](LICENSE).
 
----
-
-Faleminderit që përdor **WizQuiz**! 🎉
