@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Sfondi Gradient -->
     <View
         android:id="@+id/viewGradientBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/bg_gradient" />
 
-    <!-- Guideline për vendosjen e logos (35% nga kryeti i ekranit) -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_logo"
         android:layout_width="wrap_content"
@@ -20,7 +18,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.35" />
 
-    <!-- Logoja (ImageView): qendra e saj do të jetë në Guideline -->
     <ImageView
         android:id="@+id/imgQuizIcon"
         android:layout_width="320dp"
@@ -32,7 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Butoni "START": më i madh dhe më poshtë -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStart"
         android:layout_width="320dp"

@@ -7,7 +7,6 @@
     android:background="@drawable/bg_gradient_home"
     android:padding="16dp">
 
-    <!-- Numri i pyetjes, p.sh. 01, 02, ... -->
     <TextView
         android:id="@+id/tvQuestionNumber"
         android:layout_width="wrap_content"
@@ -22,7 +21,6 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <!-- “Flluska” e pyetjes (një FrameLayout me background të rrumbullakosur) -->
     <FrameLayout
         android:id="@+id/layoutQuestionBubble"
         android:layout_width="0dp"
@@ -38,18 +36,18 @@
             android:id="@+id/tvQuestionText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pyetja do shfaqet këtu..."
+            android:text="The question will appear here...."
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textAlignment="center"/>
     </FrameLayout>
 
-    <!-- Butoni Opsion A -->
+
     <Button
         android:id="@+id/btnOptionA"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="A) Opsioni 1"
+        android:text="A) Option 1"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:background="@drawable/option_bg"
@@ -58,12 +56,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <!-- Butoni Opsion B -->
     <Button
         android:id="@+id/btnOptionB"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="B) Opsioni 2"
+        android:text="B) Option 2"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:background="@drawable/option_bg"
@@ -72,12 +69,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <!-- Butoni Opsion C -->
     <Button
         android:id="@+id/btnOptionC"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="C) Opsioni 3"
+        android:text="C) Option 3"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:background="@drawable/option_bg"
@@ -86,12 +82,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>
 
-    <!-- Butoni Opsion D -->
     <Button
         android:id="@+id/btnOptionD"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="D) Opsioni 4"
+        android:text="D) Option 4"
         android:textColor="@android:color/white"
         android:textAllCaps="false"
         android:background="@drawable/option_bg"

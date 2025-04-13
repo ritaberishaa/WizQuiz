@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 import org.mindrot.jbcrypt.BCrypt;
-
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -41,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (email.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this,
-                            "Plotësoni email-in dhe fjalëkalimin!",
+                            "Fill in your email and password!",
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -52,23 +51,21 @@ public class LoginActivity extends AppCompatActivity {
                     String storedHashedPassword = cursor.getString(colIndex);
                     cursor.close();
 
-                    // Verifikojmë passwordin duke përdorur BCrypt
                     if (BCrypt.checkpw(password, storedHashedPassword)) {
                         Toast.makeText(LoginActivity.this,
-                                "Login i suksesshëm!",
+                                "Login successful!",
                                 Toast.LENGTH_SHORT).show();
 
-                        // Kaloni tek aktiviteti tjetër pas login
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this,
-                                "Fjalëkalimi nuk është i saktë!",
+                                "The password is incorrect!",
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(LoginActivity.this,
-                            "Ky email nuk ekziston! Regjistrohu më parë.",
+                            "This email does not exist! Register first.",
                             Toast.LENGTH_SHORT).show();
                     if (cursor != null) cursor.close();
                 }
@@ -78,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
         tvForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Kalo tek ForgotPasswordActivity
                 Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                 startActivity(intent);
             }

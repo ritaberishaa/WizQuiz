@@ -7,29 +7,28 @@
     android:background="@drawable/bg_gradient"
     android:padding="16dp">
 
-    <!-- EditText për futjen e komenteve; përdor drawable për sfond me rrumbullakë -->
     <EditText
     android:id="@+id/edtNewComment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="Shto një koment..."
+    android:hint="Add a comment..."
     android:background="@drawable/bubble_bg"
     android:padding="12dp"
     android:textColor="@android:color/white"
     android:textColorHint="@android:color/white"
     android:layout_marginBottom="12dp"/>
 
-        <!-- Butoni "SHTO" me ngjyrë të ngjashme me butonat e opsioneve -->
+
     <Button
     android:id="@+id/btnAddComment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="SHTO"
+    android:text="ADD"
     android:background="@drawable/option_bg"
     android:textColor="@android:color/white"
     android:layout_marginBottom="16dp"/>
 
-        <!-- Teks me ndarje për titullin e seksionit të komenteve -->
+
     <TextView
     android:id="@+id/tvEarlierComments"
     android:layout_width="match_parent"
@@ -41,14 +40,13 @@
     android:paddingTop="8dp"
     android:paddingBottom="8dp" />
 
-        <!-- Mundësisht një vijë ndarje (divider) -->
     <View
     android:layout_width="match_parent"
     android:layout_height="1dp"
     android:background="@android:color/white"
     android:layout_marginBottom="16dp" />
 
-        <!-- ListView për shfaqjen e komenteve; përdor një divizor personalizuar -->
+
     <ListView
         android:id="@+id/listViewComments"
         android:layout_width="match_parent"

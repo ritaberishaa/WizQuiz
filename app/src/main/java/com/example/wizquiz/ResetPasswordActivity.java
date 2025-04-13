@@ -18,7 +18,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Përdor layout‑in e ri me UI të përputhur
         setContentView(R.layout.activity_reset_password);
 
         etNewPassword = findViewById(R.id.etNewPassword);
@@ -34,17 +33,16 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 String pass2 = etConfirmPassword.getText().toString().trim();
 
                 if (pass1.isEmpty() || pass2.isEmpty()) {
-                    Toast.makeText(ResetPasswordActivity.this, "Ju lutem plotësoni të gjitha fushat", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Please fill in all fields.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!pass1.equals(pass2)) {
-                    Toast.makeText(ResetPasswordActivity.this, "Fjalëkalimet nuk përputhen!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResetPasswordActivity.this, "Passwords do not match!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // Hash fjalëkalimin duke përdorur BCrypt
                 String hashed = BCrypt.hashpw(pass1, BCrypt.gensalt());
-                databaseHelper.updateUserPassword(email, hashed); // Sigurohu që kjo metodë është implementuar në DatabaseHelper
-                Toast.makeText(ResetPasswordActivity.this, "Fjalëkalimi u përditësua me sukses!", Toast.LENGTH_SHORT).show();
+                databaseHelper.updateUserPassword(email, hashed);
+                Toast.makeText(ResetPasswordActivity.this, "Password updated successfully!", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

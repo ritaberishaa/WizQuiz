@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Nëse ke tashmë tema të tjera, shtoji këtë poshtë: -->
-
     <style name="AlertDialogTheme" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
-        <!-- Këtu mund të shtosh veti shtesë si ngjyrat, fontet, etj. -->
         <item name="colorPrimary">#AB47BC</item>
         <item name="android:colorAccent">#FFFFFF</item>
-        <!-- Shembull, për ilustrim. Mund të shtosh/qërosh sipas dëshirës. -->
     </style>
 
 </resources>

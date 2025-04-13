@@ -17,11 +17,9 @@ public class WelcomeActivity extends AppCompatActivity {
 
         btnStart = findViewById(R.id.btnStart);
 
-        // Eventi kur klikohet butoni START
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Navigimi tek LoginActivity
                 startActivity(new Intent(WelcomeActivity.this, LoginActivity.class));
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }

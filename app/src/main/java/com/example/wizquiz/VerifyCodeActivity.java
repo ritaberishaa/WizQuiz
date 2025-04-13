@@ -18,7 +18,6 @@ public class VerifyCodeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Përdor layout‑in e ri me UI të përputhur
         setContentView(R.layout.activity_verify_code);
 
         etOTP = findViewById(R.id.etOTP);
@@ -31,25 +30,23 @@ public class VerifyCodeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String inputOTP = etOTP.getText().toString().trim();
                 if (inputOTP.isEmpty()) {
-                    Toast.makeText(VerifyCodeActivity.this, "Ju lutem futni kodin OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyCodeActivity.this, "Please enter the OTP code.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 OTPData otpData = databaseHelper.getOTPInfo(email);
                 if (otpData == null) {
-                    Toast.makeText(VerifyCodeActivity.this, "Nuk u gjend kod OTP. Provoni përsëri.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyCodeActivity.this, "No OTP code found. Please try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (System.currentTimeMillis() > otpData.getExpirationTime()) {
-                    Toast.makeText(VerifyCodeActivity.this, "Kodi OTP ka skaduar. Ju lutem kërkoni një të ri.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyCodeActivity.this, "The OTP code has expired. Please request a new one.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!inputOTP.equals(otpData.getOtpCode())) {
-                    Toast.makeText(VerifyCodeActivity.this, "Kodi OTP nuk është i saktë", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VerifyCodeActivity.this, "The OTP code is incorrect.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(VerifyCodeActivity.this, "Verifikimi i OTP-së u krye me sukses!", Toast.LENGTH_SHORT).show();
-                // Pas verifikimit të suksesshëm, lexo se si të vazhdosh:
-                // këtu po e drejtojmë përdoruesin te ResetPasswordActivity; mund të jetë edhe një aktivitet kryesor sipas logjikës së aplikacionit.
+                Toast.makeText(VerifyCodeActivity.this, "OTP verification completed successfully!", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(VerifyCodeActivity.this, ResetPasswordActivity.class);
                 intent.putExtra("EMAIL", email);
                 startActivity(intent);

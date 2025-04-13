@@ -9,7 +9,6 @@ public class OTPEmailSender {
 
     private static final String smtpHost = "smtp.gmail.com";
     private static final String smtpPort = "587";
-    // Sigurohuni që të përdorni kredencialet e sakta dhe një "app password" nëse keni 2FA të aktivizuar
     private static final String senderEmail = "lifecola.company@gmail.com";
     private static final String senderPassword = "juda zpsp pkxj nhqy";
 

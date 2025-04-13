@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <!-- Root layout me sfondin gradient -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:background="@drawable/bg_gradient">
 
-        <!-- Logoja në krye -->
         <ImageView
             android:id="@+id/imgLogo"
             android:layout_width="120dp"
@@ -25,7 +23,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="64dp" />
 
-        <!-- Titulli kryesor -->
         <TextView
             android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
@@ -39,7 +36,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
 
-        <!-- Subtitle -->
         <TextView
             android:id="@+id/tvSubtitle"
             android:layout_width="wrap_content"
@@ -52,7 +48,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="4dp" />
 
-        <!-- Card me fushat e input-it -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardSignUpFields"
             android:layout_width="0dp"
@@ -71,7 +66,6 @@
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- Fusha për Emër -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilName"
                     android:layout_width="match_parent"
@@ -85,7 +79,6 @@
                         android:inputType="textPersonName"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Fusha për Email -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilEmail"
                     android:layout_width="match_parent"
@@ -99,7 +92,6 @@
                         android:inputType="textEmailAddress"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Fusha për Telefon -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPhone"
                     android:layout_width="match_parent"
@@ -113,7 +105,6 @@
                         android:inputType="phone"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Fusha për Password -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
@@ -128,7 +119,6 @@
                         android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Fusha për Confirm Password -->
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilConfirmPassword"
                     android:layout_width="match_parent"
@@ -143,7 +133,6 @@
                         android:inputType="textPassword"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Butoni CREATE -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnCreateAccount"
                     android:layout_width="match_parent"
@@ -156,7 +145,6 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Teksti "Already have an account? Login here" -->
         <TextView
             android:id="@+id/tvAlreadyHaveAccount"
             android:layout_width="wrap_content"

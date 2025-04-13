@@ -37,92 +37,105 @@ public class HomeActivity extends AppCompatActivity {
         btnOptionC = findViewById(R.id.btnOptionC);
         btnOptionD = findViewById(R.id.btnOptionD);
 
-        // 1) Gjenerojmë pyetjet
+
         questionList = generateQuestions();
 
-        // 2) Përziejmë listën dhe marrim vetëm 10, nëse ka më shumë
         Collections.shuffle(questionList, new Random());
         if (questionList.size() > 10) {
             questionList = questionList.subList(0, 10);
         }
 
-        // 3) Ngarkojmë pyetjen e parë
+
         loadQuestion();
 
-        // 4) Listener-at për opsionet
+
         btnOptionA.setOnClickListener(optionClickListener(0));
         btnOptionB.setOnClickListener(optionClickListener(1));
         btnOptionC.setOnClickListener(optionClickListener(2));
         btnOptionD.setOnClickListener(optionClickListener(3));
     }
 
-    // Krijon një listë me pyetjet e mundshme (10 pyetje rreth kodimit)
     private List<Question> generateQuestions() {
         List<Question> list = new ArrayList<>();
 
+        // 1. Which programming language is mostly used for Android development?
         list.add(new Question(
-                "Cila gjuhë programuese u përdor fillimisht për zhvillim Android?",
-                new String[]{"Java", "Swift", "JavaScript", "Kotlin"},
+                "Which programming language is mostly used for Android development?",
+                new String[]{"Java", "C#", "Python", "Ruby"},
                 0
         ));
+
+        // 2. What file extension is used for Java source files?
         list.add(new Question(
-                "Cila është gjuha kryesore për zhvillim iOS?",
-                new String[]{"Java", "Swift", "Kotlin", "Python"},
-                1
-        ));
-        list.add(new Question(
-                "Kush është themeluesi i Linux?",
-                new String[]{"Linus Torvalds", "Bill Gates", "Steve Jobs", "John Doe"},
+                "What file extension is used for Java source files?",
+                new String[]{".java", ".kt", ".cpp", ".js"},
                 0
         ));
+
+        // 3. What is Android?
         list.add(new Question(
-                "Kush shpiku World Wide Web (WWW)?",
-                new String[]{"Steve Jobs", "Mark Zuckerberg", "Tim Berners-Lee", "Elon Musk"},
+                "What is Android?",
+                new String[]{"A mobile operating system", "A programming language", "A web browser", "A computer brand"},
+                0
+        ));
+
+        // 4. Which file format is used to install Android apps?
+        list.add(new Question(
+                "Which file format is used to install Android apps?",
+                new String[]{".apk", ".exe", ".zip", ".jar"},
+                0
+        ));
+
+        // 5. Which Integrated Development Environment (IDE) is popular for Android development?
+        list.add(new Question(
+                "Which Integrated Development Environment (IDE) is popular for Android development?",
+                new String[]{"Android Studio", "Xcode", "Visual Studio", "NetBeans"},
+                0
+        ));
+
+        // 6. What does JVM stand for in Java development?
+        list.add(new Question(
+                "What does JVM stand for in Java development?",
+                new String[]{"Java Virtual Machine", "Java Visual Machine", "Just Virtual Memory", "Joint Variable Module"},
+                0
+        ));
+
+        // 7. What is the main purpose of Android Studio?
+        list.add(new Question(
+                "What is the main purpose of Android Studio?",
+                new String[]{"To develop Android applications", "To design websites", "To manage databases", "To compile C++ code"},
+                0
+        ));
+
+        // 8. Which of the following is not a Java keyword?
+        list.add(new Question(
+                "Which of the following is not a Java keyword?",
+                new String[]{"class", "interface", "define", "public"},
                 2
         ));
+
+        // 9. What does debugging mean in programming?
         list.add(new Question(
-                "Cili version i HTML konsiderohet më i fundit?",
-                new String[]{"HTML5", "HTML4", "HTML3", "HTML2"},
+                "What does debugging mean in programming?",
+                new String[]{"Fixing errors in code", "Writing the code", "Compiling code", "Adding comments"},
                 0
         ));
+
+        // 10. Which of these is a common widget used in Android user interfaces?
         list.add(new Question(
-                "Cila shtojcë përdoret zakonisht për skedarët Java?",
-                new String[]{".java", ".py", ".js", ".kt"},
+                "Which of these is a common widget used in Android user interfaces?",
+                new String[]{"Button", "Sheet", "Label", "Slider"},
                 0
-        ));
-        list.add(new Question(
-                "Cili është roli i Java Virtual Machine (JVM)?",
-                new String[]{"Interpreton kodin Python",
-                        "Kompajlon skedarët .cpp",
-                        "Ekzekuton bajtkodin e Java",
-                        "Shfaq UI në Android"},
-                2
-        ));
-        list.add(new Question(
-                "Cili format është skedari i instalimit në Android?",
-                new String[]{".exe", ".apk", ".zip", ".dex"},
-                1
-        ));
-        list.add(new Question(
-                "Cili framework ‘front-end’ del nga React?",
-                new String[]{"Vue", "Django", "React Native", "Express"},
-                2
-        ));
-        list.add(new Question(
-                "Cili modul përdoret për menaxhimin e pakove në Node.js?",
-                new String[]{"pip", "npm", "gradle", "yarn"},
-                1
         ));
 
         return list;
     }
 
-    // Ngarkon pyetjen e radhës në UI
+
     private void loadQuestion() {
         if (currentQuestionIndex < questionList.size()) {
             Question q = questionList.get(currentQuestionIndex);
 
-            // Shfaq p.sh. "01", "02", ...
             tvQuestionNumber.setText(String.format("%02d", currentQuestionIndex + 1));
             tvQuestionText.setText(q.getQuestionText());
 
@@ -133,7 +146,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    // Listener për secilin opsion
     private View.OnClickListener optionClickListener(final int selectedIndex) {
         return new View.OnClickListener() {
             @Override
@@ -143,7 +155,6 @@ public class HomeActivity extends AppCompatActivity {
         };
     }
 
-    // Kontrollon përgjigjen dhe kalon në pyetjen tjetër
     private void checkAnswer(int selectedIndex) {
         Question currentQ = questionList.get(currentQuestionIndex);
         if (selectedIndex == currentQ.getCorrectIndex()) {
@@ -158,42 +169,40 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    // Shfaq një AlertDialog me dy butona: "Luaj Përsëri" dhe "Dil"
+
     private void showResultDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Kuizi përfundoi!");
+        builder.setTitle("The quiz is over!");
         builder.setIcon(R.drawable.ic_quiz_icon); // Sigurohu që e ke këtë ikonë në res/drawable
 
-        String message = "Rezultati juaj: " + score + " / " + questionList.size()
-                + "\n\nFaleminderit që luajtët!";
+        String message = "Your result: " + score + " / " + questionList.size()
+                + "\n\nThank you for playing.";
         builder.setMessage(message);
 
-        // Butoni "Luaj Përsëri"
-        builder.setPositiveButton("Luaj Përsëri", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Play Again", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                resetQuiz(); // rifillon kuizin pa dalë nga aktiviteti
+                resetQuiz();
             }
         });
 
         // Butoni "Dil"
-        builder.setNegativeButton("Dil", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                // Hap WelcomeActivity dhe mbyll HomeActivity
+
                 startActivity(new Intent(HomeActivity.this, WelcomeActivity.class));
                 finish();
             }
         });
 
-        // **Butoni "Komento"** (CRUD i komenteve në një aktivitet të ri)
-        builder.setNeutralButton("Komento", new DialogInterface.OnClickListener() {
+     //CRUD
+        builder.setNeutralButton("Comment", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                // Hapi CommentsActivity
                 startActivity(new Intent(HomeActivity.this, CommentActivity.class));
             }
         });
@@ -203,13 +212,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-
-    // Rifillon kuizin nga e para (0 pikë, pyetje e parë, etj.)
     private void resetQuiz() {
         score = 0;
         currentQuestionIndex = 0;
 
-        // Përziej përsëri pyetjet
         Collections.shuffle(questionList, new Random());
         loadQuestion();
     }

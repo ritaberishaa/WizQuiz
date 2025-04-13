@@ -9,7 +9,6 @@
     android:padding="16dp"
     android:background="@drawable/bg_gradient">
 
-    <!-- Logo e aplikacionit -->
     <ImageView
         android:id="@+id/ivQuizIcon"
         android:layout_width="80dp"
@@ -18,28 +17,25 @@
         android:contentDescription="@string/app_name"
         android:layout_marginTop="40dp" />
 
-    <!-- Titulli kryesor (p.sh., 'Verifiko Kodin') -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verifiko Kodin"
+        android:text="Verify Code"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
         android:layout_marginTop="16dp"/>
 
-    <!-- Nën‑titulli (p.sh., 'Ju lutem futni kodin e dërguar në email') -->
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ju lutem futni kodin e dërguar në email"
+        android:text="Please enter the code sent to your email."
         android:textSize="14sp"
         android:textColor="@android:color/white"
         android:layout_marginTop="4dp" />
 
-    <!-- Karta që mban fushën OTP dhe butonin Verifiko -->
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +57,7 @@
                 android:id="@+id/tilOTP"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Kodi OTP">
+                android:hint="OTP Code">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etOTP"
@@ -74,22 +70,10 @@
                 android:id="@+id/btnVerify"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="VERIFIKO"
+                android:text="VERIFY"
                 android:textAllCaps="true"
                 android:layout_marginTop="16dp"
                 style="?attr/materialButtonOutlinedStyle"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <!-- (Opsionale) Link ose text shtesë, p.sh. 'Nuk keni marrë kodin? Ridërgo...' -->
-    <!--
-    <TextView
-        android:id="@+id/tvResend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nuk keni marrë kodin? Ridërgo"
-        android:textSize="14sp"
-        android:textColor="@android:color/white"
-        android:layout_marginBottom="16dp"/>
-    -->
 </LinearLayout>

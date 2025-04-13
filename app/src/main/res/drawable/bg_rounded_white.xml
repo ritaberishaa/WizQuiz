@@ -2,18 +2,14 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <!-- Sfondo i bardhë (ose me nuancë të lehtë rozë) -->
     <solid android:color="#FFF5F9" />
 
-    <!-- Shto stroke për border të hollë me ngjyrë të zezë -->
     <stroke
         android:width="1dp"
         android:color="#000000" />
 
-    <!-- Këndet e rrumbullakëta -->
     <corners android:radius="16dp" />
 
-    <!-- Padding i brendshëm (opsional) -->
     <padding
         android:left="8dp"
         android:top="8dp"

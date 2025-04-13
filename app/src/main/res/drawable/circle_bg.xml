@@ -3,6 +3,5 @@
     android:shape="rectangle">
 
     <solid android:color="#AB47BC" />
-    <!-- Bëjmë radius të madh që të formohet rreth -->
     <corners android:radius="100dp"/>
 </shape>
