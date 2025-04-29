@@ -10,7 +10,7 @@ public class Question {
         this.options = options;
         this.correctIndex = correctIndex;
     }
-
+// metoda per me lexu tekstin, opsionet dhe indeksin korrekt
     public String getQuestionText() {
         return questionText;
     }

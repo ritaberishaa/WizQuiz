@@ -35,6 +35,10 @@ public class SignUpActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         btnCreateAccount.setOnClickListener(new View.OnClickListener() {
+//            Lexon të dhënat e futura, kontrollon boshllëqet dhe përputhjen e fjalëkalimeve,
+//            i hashuar fjalëkalimin me BCrypt dhe e ruan përdoruesin në bazë të të dhënave përmes
+//            databaseHelper.addUser(). Në fund jep konfirmimin “Account created” dhe kalon në
+//            LoginActivity.
             @Override
             public void onClick(View view) {
                 String name = etName.getText().toString().trim();
@@ -43,6 +47,7 @@ public class SignUpActivity extends AppCompatActivity {
                 String password = etPassword.getText().toString().trim();
                 String confirmPassword = etConfirmPassword.getText().toString().trim();
 
+                // kontrolimi i boshlleqeve
                 if (name.isEmpty() || email.isEmpty() || phone.isEmpty()
                         || password.isEmpty() || confirmPassword.isEmpty()) {
                     Toast.makeText(SignUpActivity.this,
@@ -50,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // perputhja e fjalkalimit
                 if (!password.equals(confirmPassword)) {
                     Toast.makeText(SignUpActivity.this,
                             "Passwords do not match!",
@@ -57,6 +63,8 @@ public class SignUpActivity extends AppCompatActivity {
                     return;
                 }
 
+                //hashimi i fjalekalimit me algoritmin BCrypt
+                // dhe pastaj behet add user ne databaze
                 String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
                 databaseHelper.addUser(email, hashedPassword, name, phone);
 
@@ -68,6 +76,7 @@ public class SignUpActivity extends AppCompatActivity {
                 finish();
             }
         });
+
 
         tvAlreadyHaveAccount.setOnClickListener(new View.OnClickListener() {
             @Override

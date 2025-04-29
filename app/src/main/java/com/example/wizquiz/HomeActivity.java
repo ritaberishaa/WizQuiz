@@ -56,72 +56,67 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private List<Question> generateQuestions() {
-        List<Question> list = new ArrayList<>();
+        List<Question> list = new ArrayList<>(); // nje array list me pyetje
 
-        // 1. Which programming language is mostly used for Android development?
+
         list.add(new Question(
                 "Which programming language is mostly used for Android development?",
                 new String[]{"Java", "C#", "Python", "Ruby"},
                 0
         ));
 
-        // 2. What file extension is used for Java source files?
+
         list.add(new Question(
                 "What file extension is used for Java source files?",
                 new String[]{".java", ".kt", ".cpp", ".js"},
                 0
         ));
 
-        // 3. What is Android?
+
         list.add(new Question(
                 "What is Android?",
                 new String[]{"A mobile operating system", "A programming language", "A web browser", "A computer brand"},
                 0
         ));
 
-        // 4. Which file format is used to install Android apps?
+
         list.add(new Question(
                 "Which file format is used to install Android apps?",
                 new String[]{".apk", ".exe", ".zip", ".jar"},
                 0
         ));
 
-        // 5. Which Integrated Development Environment (IDE) is popular for Android development?
+
         list.add(new Question(
                 "Which Integrated Development Environment (IDE) is popular for Android development?",
                 new String[]{"Android Studio", "Xcode", "Visual Studio", "NetBeans"},
                 0
         ));
 
-        // 6. What does JVM stand for in Java development?
         list.add(new Question(
                 "What does JVM stand for in Java development?",
                 new String[]{"Java Virtual Machine", "Java Visual Machine", "Just Virtual Memory", "Joint Variable Module"},
                 0
         ));
 
-        // 7. What is the main purpose of Android Studio?
         list.add(new Question(
                 "What is the main purpose of Android Studio?",
                 new String[]{"To develop Android applications", "To design websites", "To manage databases", "To compile C++ code"},
                 0
         ));
 
-        // 8. Which of the following is not a Java keyword?
         list.add(new Question(
                 "Which of the following is not a Java keyword?",
                 new String[]{"class", "interface", "define", "public"},
                 2
         ));
 
-        // 9. What does debugging mean in programming?
         list.add(new Question(
                 "What does debugging mean in programming?",
                 new String[]{"Fixing errors in code", "Writing the code", "Compiling code", "Adding comments"},
                 0
         ));
 
-        // 10. Which of these is a common widget used in Android user interfaces?
         list.add(new Question(
                 "Which of these is a common widget used in Android user interfaces?",
                 new String[]{"Button", "Sheet", "Label", "Slider"},
@@ -130,7 +125,6 @@ public class HomeActivity extends AppCompatActivity {
 
         return list;
     }
-
 
     private void loadQuestion() {
         if (currentQuestionIndex < questionList.size()) {
@@ -155,6 +149,7 @@ public class HomeActivity extends AppCompatActivity {
         };
     }
 
+    // krahasohet nese pergjigja eshte e njejt me ineksin korrekt, nese po rrit scoren dhe kalon ne next question
     private void checkAnswer(int selectedIndex) {
         Question currentQ = questionList.get(currentQuestionIndex);
         if (selectedIndex == currentQ.getCorrectIndex()) {
@@ -169,11 +164,10 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
     private void showResultDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("The quiz is over!");
-        builder.setIcon(R.drawable.ic_quiz_icon); // Sigurohu që e ke këtë ikonë në res/drawable
+        builder.setIcon(R.drawable.ic_quiz_icon);
 
         String message = "Your result: " + score + " / " + questionList.size()
                 + "\n\nThank you for playing.";
@@ -187,7 +181,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        // Butoni "Dil"
         builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -210,7 +203,6 @@ public class HomeActivity extends AppCompatActivity {
         builder.setCancelable(false);
         builder.show();
     }
-
 
     private void resetQuiz() {
         score = 0;

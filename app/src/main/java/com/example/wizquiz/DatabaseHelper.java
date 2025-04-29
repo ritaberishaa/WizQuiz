@@ -5,9 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-// import android.database.sqlite.SQLiteOpenHelper; // e përdorim për ndërtim DB
 
-// Shembull i thjeshtuar i një SQLiteOpenHelper (ose mund të kesh tjetër strukturë)
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "WizQuizDB.db";
@@ -26,7 +25,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
-
+// ekzekuton dy CREATE TABLE:
+// users(id PK AUTOINCREMENT, email UNIQUE, password) – ruan kredencialet.
+// otp_data(otp_email, otp_code, otp_expiry) – ruan nje OTP + kohen e skadences per çdo email
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
@@ -44,18 +45,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_OTP_TABLE);
     }
 
+//  nese rritet DATABASE_VERSION, tabelat fshihen dhe rindertohen
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_OTP);
         onCreate(db);
     }
+
+    // per mbrojtje - sql injection nje cursor
     public Cursor getUserByEmail(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_USERS + " WHERE " + COLUMN_EMAIL + " = ?";
         return db.rawQuery(query, new String[]{email});
     }
 
+
+    // vetem nje otp e vlefshme dhe tjerat fshihen
     public void saveOTP(String email, String code, long expiry) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_OTP, COLUMN_OTP_EMAIL + "=?", new String[]{email});
@@ -69,6 +75,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+
+    // lezohet pra otp_code edhe otp_expiry, nese ekziston
     public OTPData getOTPInfo(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_OTP + " WHERE " + COLUMN_OTP_EMAIL + " = ?";
@@ -78,7 +86,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             long exp = c.getLong(c.getColumnIndexOrThrow(COLUMN_OTP_EXPIRY));
             c.close();
             db.close();
-            return new OTPData(code, exp);
+            return new OTPData(code, exp); // kthen objekt
         }
         if (c != null) c.close();
         db.close();

@@ -26,18 +26,20 @@ public class VerifyCodeActivity extends AppCompatActivity {
         email = getIntent().getStringExtra("EMAIL");
 
         btnVerify.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                String inputOTP = etOTP.getText().toString().trim();
+                String inputOTP = etOTP.getText().toString().trim(); // lexohet otp
                 if (inputOTP.isEmpty()) {
                     Toast.makeText(VerifyCodeActivity.this, "Please enter the OTP code.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                OTPData otpData = databaseHelper.getOTPInfo(email);
+                OTPData otpData = databaseHelper.getOTPInfo(email); // merret objekti otpData nga db dhe kontrollohet nese ka rekorde
                 if (otpData == null) {
                     Toast.makeText(VerifyCodeActivity.this, "No OTP code found. Please try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                // kontrollohet skadenca e kodit
                 if (System.currentTimeMillis() > otpData.getExpirationTime()) {
                     Toast.makeText(VerifyCodeActivity.this, "The OTP code has expired. Please request a new one.", Toast.LENGTH_SHORT).show();
                     return;
