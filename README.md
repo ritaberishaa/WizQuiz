@@ -1,49 +1,47 @@
 # WizQuiz
 
-**WizQuiz** është një aplikacion edukativ në formë kuizi, i ndërtuar për platformën Android. Ky projekt synon të ndihmojë përdoruesit të testojnë dhe përmirësojnë njohuritë e tyre në mënyrë argëtuese dhe interaktive.
+WizQuiz është një aplikacion kuizi për Android që u mundëson studentëve të testojnë njohuritë në programim në mënyrë offline, me rezultat të menjëhershëm dhe feedback përmes komenteve.
 
-Ky aplikacion eshte zhvilluar nga studentet e vitit te trete FIEK, drejtimi Inxhinieri Kompjuterike:
+## Veçoritë
 
-- Rita Berisha [@ritaberishaa](https://github.com/ritaberishaa)
-- Shpat Mjeku [@shpatmjeku](https://github.com/shpatmjeku)
-- Yll Sheremeti [@YllSheremeti](https://github.com/YllSheremeti)
-- Yll Pllana [@YlliPllana](https://github.com/YlliPllana)
+| Kategoria            | Përshkrimi                                                      |
+|----------------------|-----------------------------------------------------------------|
+| Kuiz offline         | Pyetje të ruajtura lokalisht, nuk kërkohet internet              |
+| Autentikim i sigurt  | Hash BCrypt për fjalëkalimet, rikuperim me OTP 6-shifror         |
+| Rezultate të çastit  | Dialog përfundimtar me pikët dhe opsion për të rifilluar kuizin |
+| Komente              | CRUD komentesh të ruajtura në SQLite                            |
+| UI Material Design   | Butona, input-e dhe animacione në përputhje me udhëzimet e Google|
 
-## Karakteristikat
+## Kërkesat
 
-- Pyetje me shumë alternativa
-- Vlerësimi i menjëhershëm i përgjigjeve
-- Pikët e përdoruesit dhe përparimi
-- UI i lehtë për përdoruesin
-- Struktura e kodit e organizuar sipas praktikave më të mira
+- Android Studio Arctic Fox (ose më i ri)
+- JDK 17
+- Pajisje ose emulator me Android 8.0+
 
-## Ekzekutimi i Projektit
+## Siguria
+- BCrypt me salt për çdo fjalëkalim
+- OTP 6-shifror ruhet me email dhe afat skadimi 5 minuta
+- OTP fshihet pas përdorimit ose skadimit
 
-1. Sigurohu që ke të instaluar **Android Studio** (rekomandohet versioni i fundit).
-2. Klono ose shkarko projektin:
+## Instalimi dhe ekzekutimi
 
-   ```bash
-   git clone https://github.com/username/WizQuiz.git
-   ```
+```bash
+git clone https://github.com/username/WizQuiz.git
+cd WizQuiz
+# Hap projektin në Android Studio
+# Lejo Gradle të sinkronizohet dhe shtyp Run
 
-3. Hap folderin `WizQuiz` në Android Studio.
-4. Lejo gradle të sinkronizohet dhe pastaj kliko **Run** për të ndërtuar aplikacionin në një emulator ose pajisje fizike.
-
-## Teknologjitë e përdorura
-
-- Java
-- Android SDK
-- Gradle
-- Material Design
-
-## Struktura e Projektit
-
-```
-WizQuiz/
-├── app/                   # Kodi burimor i aplikacionit
-├── build.gradle.kts       # Konfigurimi i ndërtimit
-├── gradle/                # Skedarët e ndërtimit
-└── settings.gradle.kts    # Cilësimet e projektit
-```
-
-
+app/
+├── java/com/example/wizquiz/
+│   ├── WelcomeActivity.java       # Ekrani hyrës
+│   ├── LoginActivity.java         # Autentikimi
+│   ├── SignUpActivity.java        # Regjistrimi
+│   ├── ForgotPasswordActivity.java
+│   ├── VerifyCodeActivity.java
+│   ├── ResetPasswordActivity.java
+│   ├── HomeActivity.java          # Kuizi
+│   ├── CommentActivity.java       # Komentet
+│   ├── DatabaseHelper.java        # SQLite: users & otp
+│   ├── CommentDatabaseHelper.java # SQLite: comments
+│   └── OTPEmailSender.java        # JavaMail
+└── res/layout/                    # Skedarët e ndërfaqes
